@@ -39,6 +39,10 @@ def test_temperature_conversion_from_string():
   temperature = thermometer.Temperature("68.0")
   assert 68.0 == temperature.farenheit
 
+def test_temperature_truncation_of_celcius():
+  temperature = thermometer.Temperature(69.0)
+  assert 20.56 == temperature.celcius
+
 def test_current_temperature():
   connection = FakeConnection({ "temperature:current": "72.0" })
   sensor = thermometer.Sensor(connection)
