@@ -1,6 +1,4 @@
-from sensor import Sensor
-from temperature import Temperature
-from connection import Connection
+import thermometer
 
 class FakeConnection:
   def __init__(self, command_dictionary):
@@ -28,28 +26,28 @@ class FakeSerialPort:
     self.next_response = FakeSerialPort.NO_RESPONSE
 
 def test_temperature_equality():
-  t1 = Temperature(70.0)
-  t2 = Temperature(70.0)
+  t1 = thermometer.Temperature(70.0)
+  t2 = thermometer.Temperature(70.0)
   assert t1 == t2
 
 def test_temperature_conversion_to_celcius():
-  temperature = Temperature(68.0)
+  temperature = thermometer.Temperature(68.0)
   celcius = 20.0
   assert celcius == temperature.celcius
 
 def test_temperature_conversion_from_string():
-  temperature = Temperature("68.0")
+  temperature = thermometer.Temperature("68.0")
   assert 68.0 == temperature.farenheit
 
 def test_current_temperature():
   connection = FakeConnection({ "temperature:current": "72.0" })
-  sensor = Sensor(connection)
+  sensor = thermometer.Sensor(connection)
   temperature = sensor.current_temperature()
-  assert Temperature(72.0) == temperature
+  assert thermometer.Temperature(72.0) == temperature
 
 def test_connection():
   fake_serial_port = FakeSerialPort()
-  connection = Connection(fake_serial_port)
+  connection = thermometer.Connection(fake_serial_port)
   response = connection.send("temperature:current")
   assert "72.0" == response
 
