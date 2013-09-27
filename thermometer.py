@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import serial
+import sqlite3
 
 def sensor(serial_port):
   serial_port = serial.Serial(serial_port, 9600)
@@ -36,4 +37,46 @@ class Temperature:
     return "{farenheit}°F ({celcius}°C)".format(farenheit=self.farenheit, celcius=self.celcius)
   def __eq__(self, other):
     return self.__dict__ == other.__dict__
+
+class Database:
+  def __init__(self, database_name):
+    self.connection = sqlite3.connect(database_name)
+    self.connection.row_factory = sqlite3.Row
+
+  def create_table(self, sql):
+    self.execute_and_commit(sql)
+
+  def drop_table(self, table_name):
+    self.execute_and_commit("DROP TABLE " + table_name)
+
+  def insert(self, sql, variables):
+    self.execute_and_commit(sql, variables)
+
+  def select_one(self, sql):
+    cursor = self.__execute(sql)
+    return cursor.fetchone()
+
+  def execute_and_commit(self, *args):
+    self.__execute(*args)
+    self.connection.commit()
+
+  def __execute(self, *args):
+    cursor = self.connection.cursor()
+    cursor.execute(*args)
+    return cursor
+
+class Store:
+  def __init__(self, database):
+    self.database = database
+
+  def persist(self, temperature):
+    self.database.insert("INSERT INTO temperatures (farenheit) VALUES (?)", [str(temperature.farenheit)])
+
+  def current_temperature(self):
+    result = self.database.select_one("SELECT temperatures.farenheit FROM temperatures ORDER BY id DESC LIMIT 1")
+    return Temperature(result["farenheit"])
+
+  def reset(self):
+    self.database.drop_table("temperatures")
+    self.database.execute_and_commit("CREATE TABLE IF NOT EXISTS temperatures (id INTEGER PRIMARY KEY, farenheit TEXT)")
 
