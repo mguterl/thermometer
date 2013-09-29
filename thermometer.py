@@ -48,7 +48,10 @@ class Store:
     result = self.database.select_one("SELECT temperatures.farenheit FROM temperatures ORDER BY id DESC LIMIT 1")
     return Temperature(result["farenheit"])
 
+  def setup(self):
+    self.database.execute_and_commit("CREATE TABLE IF NOT EXISTS temperatures (id INTEGER PRIMARY KEY, farenheit TEXT)")
+
   def reset(self):
     self.database.drop_table("temperatures")
-    self.database.execute_and_commit("CREATE TABLE IF NOT EXISTS temperatures (id INTEGER PRIMARY KEY, farenheit TEXT)")
+    self.setup()
 
