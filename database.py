@@ -9,7 +9,7 @@ class Database:
     self.execute_and_commit(sql)
 
   def drop_table(self, table_name):
-    self.execute_and_commit("DROP TABLE " + table_name)
+    self.execute_and_commit("DROP TABLE IF EXISTS " + table_name)
 
   def insert(self, sql, variables):
     self.execute_and_commit(sql, variables)
