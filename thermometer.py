@@ -66,6 +66,7 @@ class CLI:
     temperature_sensor = sensor("/dev/ttyACM0")
     current = temperature_sensor.current_temperature()
     self.store.persist(current)
+    print current
 
   def display(self):
     print self.store.current_temperature()
