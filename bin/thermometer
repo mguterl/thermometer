@@ -1,13 +1,7 @@
 #!/usr/bin/env python
 
 import thermometer
-import database
+import sys
 
-temperature_sensor = thermometer.sensor("/dev/ttyACM0")
-database = database.Database('thermometer.db')
-store = thermometer.Store(database)
-
-store.setup()
-current = temperature_sensor.current_temperature()
-store.persist(current)
-
+cli = thermometer.CLI()
+cli.run(sys.argv)

@@ -55,3 +55,25 @@ class Store:
     self.database.drop_table("temperatures")
     self.setup()
 
+import database
+
+class CLI:
+  def record(self):
+    temperature_sensor = sensor("/dev/ttyACM0")
+    database = database.Database('thermometer.db')
+    store = Store(database)
+    current = temperature_sensor.current_temperature()
+    store.persist(current)
+
+  def run(self, argv):
+    if len(argv) < 2:
+      print "usage"
+      exit()
+
+    self.execute(argv[1])
+
+  def execute(self, command):
+    getattr(self, command, self.unknown_command)()
+
+  def unknown_command(self):
+    print "unknown command"
