@@ -58,12 +58,17 @@ class Store:
 import database
 
 class CLI:
+  def __init__(self):
+    db = database.Database('thermometer.db')
+    self.store = Store(db)
+
   def record(self):
     temperature_sensor = sensor("/dev/ttyACM0")
-    database = database.Database('thermometer.db')
-    store = Store(database)
     current = temperature_sensor.current_temperature()
-    store.persist(current)
+    self.store.persist(current)
+
+  def display(self):
+    print self.store.current_temperature()
 
   def run(self, argv):
     if len(argv) < 2:
