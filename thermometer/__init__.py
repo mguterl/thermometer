@@ -3,18 +3,13 @@ from database import Database
 from connection import Connection
 from temperature import Temperature
 from store import Store
+from sensor import Sensor
 
 def sensor(serial_port):
   serial_port = serial.Serial(serial_port, 9600)
   serial_port.readline()
   connection = Connection(serial_port)
   return Sensor(connection)
-
-class Sensor:
-  def __init__(self, connection):
-    self.connection = connection
-  def current_temperature(self):
-    return Temperature(self.connection.send("temperature:current"))
 
 
 import database
