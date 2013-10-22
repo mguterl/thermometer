@@ -1,9 +1,8 @@
 from thermometer import thermometer
-from thermometer import database
 
 def test_persist_temperature():
   t1 = thermometer.Temperature(72.0)
-  db = database.Database('thermometer.db')
+  db = thermometer.Database('thermometer.db')
   store = thermometer.Store(db)
   store.reset()
   store.persist(t1)
@@ -11,7 +10,7 @@ def test_persist_temperature():
   assert t1 == t2
 
 def test_current_temperature_returns_most_recent_entry():
-  db = database.Database('thermometer.db')
+  db = thermometer.Database('thermometer.db')
   store = thermometer.Store(db)
   store.reset()
   t1 = thermometer.Temperature(72.0)

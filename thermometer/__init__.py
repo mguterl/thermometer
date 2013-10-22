@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import serial
+from database import Database
 
 def sensor(serial_port):
   serial_port = serial.Serial(serial_port, 9600)
