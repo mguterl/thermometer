@@ -1,4 +1,4 @@
-from thermometer import thermometer
+import thermometer
 
 class FakeConnection:
   def __init__(self, command_dictionary):

@@ -1,4 +1,4 @@
-from thermometer import thermometer
+import thermometer
 
 def test_persist_temperature():
   t1 = thermometer.Temperature(72.0)

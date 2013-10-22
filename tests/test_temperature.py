@@ -1,4 +1,4 @@
-from thermometer import thermometer
+import thermometer
 
 def test_temperature_equality():
   print dir(thermometer)
