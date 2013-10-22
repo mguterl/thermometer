@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
-
 import serial
 from database import Database
 from connection import Connection
+from temperature import Temperature
 
 def sensor(serial_port):
   serial_port = serial.Serial(serial_port, 9600)
@@ -10,21 +9,12 @@ def sensor(serial_port):
   connection = Connection(serial_port)
   return Sensor(connection)
 
-
 class Sensor:
   def __init__(self, connection):
     self.connection = connection
   def current_temperature(self):
     return Temperature(self.connection.send("temperature:current"))
 
-class Temperature:
-  def __init__(self, farenheit):
-    self.farenheit = float(farenheit)
-    self.celcius = round(((self.farenheit - 32) * 5) / 9, 2)
-  def __repr__(self):
-    return "{farenheit}°F ({celcius}°C)".format(farenheit=self.farenheit, celcius=self.celcius)
-  def __eq__(self, other):
-    return self.__dict__ == other.__dict__
 
 class Store:
   def __init__(self, database):
