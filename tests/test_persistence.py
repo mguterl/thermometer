@@ -1,5 +1,5 @@
-import thermometer
-import database
+from thermometer import thermometer
+from thermometer import database
 
 def test_persist_temperature():
   t1 = thermometer.Temperature(72.0)
