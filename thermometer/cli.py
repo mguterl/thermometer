@@ -2,17 +2,13 @@ import thermometer
 
 class CLI:
   def __init__(self):
-    db = thermometer.Database('thermometer.db')
-    self.store = thermometer.Store(db)
+    self.app = thermometer.App()
 
   def record(self):
-    temperature_sensor = thermometer.sensor("/dev/ttyACM0")
-    current = temperature_sensor.current_temperature()
-    self.store.persist(current)
-    print current
+    print self.app.record()
 
   def display(self):
-    print self.store.current_temperature()
+    print self.app.read()
 
   def run(self, argv):
     if len(argv) < 2:
