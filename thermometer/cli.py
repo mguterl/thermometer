@@ -10,6 +10,10 @@ class CLI:
   def display(self):
     print self.app.read()
 
+  def reset(self):
+    print "Dropping and creating table temperatures"
+    self.app.reset()
+
   def run(self, argv):
     if len(argv) < 2:
       print "usage"

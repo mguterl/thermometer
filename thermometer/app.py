@@ -23,3 +23,6 @@ class App:
 
   def current_temperature(self):
     return self.sensor.current_temperature()
+
+  def reset(self):
+    return self.store.reset()
