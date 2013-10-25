@@ -2,7 +2,7 @@ import thermometer
 
 class CLI:
   def __init__(self):
-    self.app = thermometer.App()
+    self.app = thermometer.App.default()
 
   def record(self):
     print self.app.record()
