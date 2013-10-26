@@ -1,7 +1,6 @@
 import thermometer
 
 def test_temperature_equality():
-  print dir(thermometer)
   t1 = thermometer.Temperature(70.0)
   t2 = thermometer.Temperature(70.0)
   assert t1 == t2
