@@ -4,6 +4,8 @@ A python interface for interacting with a temperature sensor connected to an Ard
 
 It assumes that communication with the Arduino is done via the serial port and a specific command structure is being used.
 
+[![Build Status](https://travis-ci.org/mguterl/thermometer.png?branch=master)](https://travis-ci.org/mguterl/thermometer)
+
 ## Usage
 
 ```python
