@@ -4,6 +4,7 @@ from connection import Connection
 from temperature import Temperature
 from store import Store
 from sensor import Sensor
+from fake_sensor import FakeSensor
 from cli import CLI
 from app import App
 
