@@ -6,5 +6,6 @@ class Sensor:
     self.clock = clock
 
   def current_temperature(self):
-    return Temperature(self.connection.send("temperature:current"), self.clock.now())
+    return Temperature(self.connection.send("temperature:current"),
+                       self.clock.now())
 
