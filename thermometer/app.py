@@ -1,8 +1,22 @@
 import thermometer
+import os
 
 class App:
   @classmethod
-  def default(cls):
+  def start(cls, env = os.environ):
+    thermometer_env = env.get('THERMOMETER_ENV', 'development')
+    return getattr(cls, thermometer_env)()
+
+  @classmethod
+  def development(cls):
+    database = thermometer.Database('thermometer_development.db')
+    store = thermometer.Store(database)
+    sensor = thermometer.FakeSensor(68)
+
+    return cls(store, sensor)
+
+  @classmethod
+  def production(cls):
     database = thermometer.Database('thermometer.db')
     store = thermometer.Store(database)
     sensor = thermometer.sensor('/dev/ttyACM0')
