@@ -11,6 +11,12 @@ class App:
   def development(cls):
     database = thermometer.Database('thermometer_development.db')
     store = thermometer.Store(database)
+    current_temperature = store.current_temperature()
+
+    if current_temperature:
+      current_temperature = current_temperature.farenheit
+    else:
+      current_temperature = 68
     sensor = thermometer.FakeSensor(68)
 
     return cls(store, sensor)
