@@ -1,5 +1,6 @@
 import thermometer
 import os
+import datetime
 
 class App:
   @classmethod
@@ -14,10 +15,14 @@ class App:
     current_temperature = store.current_temperature()
 
     if current_temperature:
+      now = current_temperature.datetime
       current_temperature = current_temperature.farenheit
     else:
       current_temperature = 68
-    sensor = thermometer.FakeSensor(68)
+      now = datetime.datetime.now()
+
+    fake_clock = thermometer.FakeClock(now, 5)
+    sensor = thermometer.FakeSensor(68, fake_clock)
 
     return cls(store, sensor)
 

@@ -8,6 +8,7 @@ from fake_sensor import FakeSensor
 from cli import CLI
 from app import App
 from http import http
+from fake_clock import FakeClock
 
 def sensor(serial_port):
   serial_port = serial.Serial(serial_port, 9600)
