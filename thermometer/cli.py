@@ -2,7 +2,7 @@ import thermometer
 
 class CLI:
   def __init__(self):
-    self.app = thermometer.App.default()
+    self.app = thermometer.App.start()
 
   def record(self):
     print self.app.record()
@@ -13,6 +13,10 @@ class CLI:
   def reset(self):
     print "Dropping and creating table temperatures"
     self.app.reset()
+
+  def serve(self):
+    thermometer.http.config['APP'] = self.app
+    thermometer.http.run()
 
   def run(self, argv):
     if len(argv) < 2:
