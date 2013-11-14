@@ -10,7 +10,9 @@ class Store:
 
   def current_temperature(self):
     result = self.database.select_one("SELECT temperatures.farenheit, temperatures.created_at FROM temperatures ORDER BY id DESC LIMIT 1")
-    return Temperature(result["farenheit"], self.parse_datetime(result["created_at"]))
+
+    if result:
+      return Temperature(result["farenheit"], self.parse_datetime(result["created_at"]))
 
   def setup(self):
     self.database.execute_and_commit("CREATE TABLE IF NOT EXISTS temperatures (id INTEGER PRIMARY KEY, created_at TEXT, farenheit TEXT)")
