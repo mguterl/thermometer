@@ -24,11 +24,6 @@ class TestPersistence(unittest.TestCase):
     store.persist(t2)
     assert t2 == store.current_temperature()
 
-  def test_read_temperatures_given_a_start_time(self):
-    db = thermometer.Database('thermometer.db')
-    store = thermometer.Store(db)
-    store.reset()
-
   def test_does_not_error_with_no_previous_entries(self):
     db = thermometer.Database('thermometer.db')
     store = thermometer.Store(db)
