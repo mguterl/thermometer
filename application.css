@@ -11,10 +11,6 @@ h1 {
   font-size: 4em;
 }
 
-h2 {
-  margin-bottom: 10px;
-}
-
 .charts {
   width: 100%;
   margin: 0 auto;
@@ -23,8 +19,4 @@ h2 {
 .chart-wrap {
   width: 400px;
   display: inline-block;
-}
-
-.current-temperature {
-  margin-bottom: 35px;
 }
