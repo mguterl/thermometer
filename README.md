@@ -31,3 +31,39 @@ sensor.current_temperature # => 70°F (21.11°C)
 
 Currently the Arduino only responds to one command `temperature:current`. In
 the future more commands may be implemented following this pattern.
+
+## API
+
+```json
+{
+  current_temperature: 71.0,
+  high_temperature: 80.0,
+  low_temperature: 68.5,
+  average_temperature: 73.0,
+}
+
+{
+  start_time: '',
+  end_time: '',
+  average_temperature: 73.0,
+  temperatures: [
+    {
+      time: '',
+      temperature: 71.0
+    }
+  ]
+}
+
+{
+  temperatures: [
+    {
+      date: '',
+      average_temperature: 72.0
+    },
+    {
+      date: '',
+      average_temperature: 70.0
+    }
+  ]
+}
+```
